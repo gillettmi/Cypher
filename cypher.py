@@ -1,5 +1,6 @@
 #!/user/bin/python3
-# Written by Michael Gillett, 2020
+# Based on the work of Al Sweigart's book, "Cracking Codes with Python"
+# https://nostarch.com/crackingcodes/
 
 import os
 
