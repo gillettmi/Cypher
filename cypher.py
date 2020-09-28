@@ -3,6 +3,9 @@
 # https://nostarch.com/crackingcodes/
 
 import os
+try: import pyperclip
+except ImportError:
+    print('Import Error: Unable to import pyperclip.')
 
 letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
@@ -25,6 +28,7 @@ main_menu = '''
 
 def press_enter():
     input('\nPress enter to continue...')
+    os.system('clear')
 
 
 def error(message):
@@ -38,7 +42,7 @@ def write_output(message, output_file):
         f.close()
 
 
-def vigenere_cypher(mode=''):
+def vigenere_cypher(encode=True):
 
     message = str(input('Message:'))
     key = str(input('Encryption Key:'))
@@ -53,10 +57,10 @@ def vigenere_cypher(mode=''):
         num = letters.find(letter.upper())
         if num != -1:
 
-            if mode == 'encode':
+            if encode:
                 num += letters.find(key[index])
 
-            elif mode == 'decode':
+            else:
                 num -= letters.find(key[index])
 
             num %= len(letters)
@@ -82,8 +86,11 @@ def vigenere_cypher(mode=''):
 
 def transmit(text):
     print('\nConverted Message:', text)
-    write_output(message=text,
-                 output_file=(os.path.join(current_directory, 'output.txt')))
+    pyperclip.copy(text)
+    write_output(
+        message=text,
+        output_file=(os.path.join(current_directory, 'output.txt')))
+    print('Message saved to clipboard.\n')
     press_enter()
 
 
@@ -94,11 +101,11 @@ def main():
             choice = int(input('Input:'))
 
             if choice == 1:
-                output = vigenere_cypher('encode')
+                output = vigenere_cypher()
                 transmit(output)
 
             elif choice == 2:
-                output = vigenere_cypher('decode')
+                output = vigenere_cypher(encode=False)
                 transmit(output)
 
             elif choice == 3:
