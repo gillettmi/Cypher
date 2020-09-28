@@ -1,4 +1,4 @@
-#!/user/bin/python3
+#!/usr/bin/python3
 # Based on the work of Al Sweigart's book, "Cracking Codes with Python"
 # https://nostarch.com/crackingcodes/
 
